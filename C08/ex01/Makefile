@@ -1,4 +1,4 @@
-SRCS		=	main.cpp \
+SRCS		=	main.cpp Span.cpp \
 
 OBJS		=	$(addprefix objs/,$(SRCS:.cpp=.o))
 
@@ -8,7 +8,7 @@ RM			=	rm -f
 
 CC 			=	g++
 
-NAME		=	Array
+NAME		=	templates
 
 all:		$(NAME)
 

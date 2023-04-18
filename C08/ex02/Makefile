@@ -8,7 +8,7 @@ RM			=	rm -f
 
 CC 			=	g++
 
-NAME		=	Array
+NAME		=	templates
 
 all:		$(NAME)
 
