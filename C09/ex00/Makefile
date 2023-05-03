@@ -6,7 +6,7 @@ CFLAGS		= 	-std=c++98 -Wall -Wextra -Werror
 
 RM			=	rm -f
 
-CC 			=	g++
+CC 			=	c++
 
 NAME		=	bitcoin_exchange
 

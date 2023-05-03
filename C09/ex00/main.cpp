@@ -2,6 +2,10 @@
 
 void	validate_date(std::string const & date)
 {
+	if (date.length() != 10)
+		throw std::invalid_argument("Invalid date format");
+	if (date.find_first_not_of("0123456789-") != std::string::npos)
+		throw std::invalid_argument("Invalid date format");
 	if (date[4] != '-' || date[7] != '-')
 		throw std::invalid_argument("Invalid date format");
 	for (int i = 0; i < 10; i++)
@@ -38,7 +42,6 @@ void	validate_date(std::string const & date)
 
 void	validate_quantity(std::string const & quantity)
 {
-	std::cout << "|" << quantity << "|" << std::endl;
 	if (quantity[0] != ' ')
 		throw std::invalid_argument("Invalid quantity format");
 	for (unsigned int i = 1; i < quantity.length(); i++)
@@ -46,6 +49,11 @@ void	validate_quantity(std::string const & quantity)
 		if (!isdigit(quantity[i]) && quantity[i] != '.')
 			throw std::invalid_argument("Invalid quantity format");
 	}
+	double q = std::atof(quantity.substr(1).c_str());
+	if (q < 0)
+		throw std::invalid_argument("Invalid quantity format");
+	if (q > 1000)
+		throw std::invalid_argument("Invalid quantity format");
 }
 
 int main(int ac, char **av)
@@ -58,13 +66,16 @@ int main(int ac, char **av)
 	BitcoinExchange		exchange;
 	std::string		line;
 	std::ifstream	ifs(av[1]);
-	int i = 1;
+	int i = 0;
 	while (getline(ifs, line))
 	{
+		i++;
 		try
 		{
-			validate_date(line.substr(0, '|'));
+			std::cout << "\e[1;31m";
+			validate_date(line.substr(0, line.find(' ')));
 			validate_quantity(line.substr(line.find('|') + 1));
+			std::cout << "\e[0m";
 		}
 		catch (std::invalid_argument & e)
 		{
@@ -72,7 +83,6 @@ int main(int ac, char **av)
 			continue ;
 		}
 		exchange.searchMap(line);
-		i++;
 	}
 	return (0);
 }

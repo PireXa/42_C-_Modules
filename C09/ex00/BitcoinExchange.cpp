@@ -53,16 +53,15 @@ void	BitcoinExchange::printMap()
 
 void	BitcoinExchange::searchMap(std::string const & search_string)
 {
-	long double		price = std::strtod(search_string.substr(search_string.find('|') + 1).c_str(), NULL);
+	long double		quantity = std::strtod(search_string.substr(search_string.find('|') + 1).c_str(), NULL);
 	std::map<std::string, double>::iterator it = this->exchange.find(search_string.substr(0, search_string.find(' ')));
+	std::cout << std::setprecision(2) << std::fixed;
 	if (it != this->exchange.end())
-		std::cout << "FOUND		" << it->first << " " << it->second * price << std::endl;
+		std::cout << search_string.substr(0, search_string.find(' ')) << "  " << quantity << "btc =|=|=> " << it->second * quantity << " dinehriso" << std::endl;
 	else
 	{
 		it = this->exchange.lower_bound(search_string.substr(0, search_string.find(' ')) + " ");
-		if (it == this->exchange.begin())
-			std::cout << "Not found" << std::endl;
 		it--;
-		std::cout << "FOUND		" << it->first << " " << it->second * price << std::endl;
+		std::cout << search_string.substr(0, search_string.find(' ')) << "  " << quantity << "btc =|=|=> " << it->second * quantity << " dinehriso" << std::endl;
 	}
 }
