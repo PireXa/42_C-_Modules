@@ -2,13 +2,13 @@ SRCS		=	main.cpp \
 
 OBJS		=	$(addprefix objs/,$(SRCS:.cpp=.o))
 
-CFLAGS		= 	-std=c++98 -Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -std=c++98
 
 RM			=	rm -f
 
-CC 			=	g++
+CC 			=	c++
 
-NAME		=	templates
+NAME		=	PmergeMe
 
 all:		$(NAME)
 
